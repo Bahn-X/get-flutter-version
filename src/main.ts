@@ -9,16 +9,6 @@ interface Pubspec {
   version?: string
 }
 
-async function run(): Promise<void> {
-  try {
-    await getFlutterVersion()
-  } catch (error) {
-    core.setFailed(error.message)
-  }
-}
-
-run()
-
 const inputs = {
   path: core.getInput('path-to-pubspec') ?? ''
 }
@@ -63,3 +53,13 @@ async function readYamlFile(file: string): Promise<safeLoadType> {
   )
   return yaml.safeLoad(fileData)
 }
+
+async function run(): Promise<void> {
+  try {
+    await getFlutterVersion()
+  } catch (error) {
+    core.setFailed(error.message)
+  }
+}
+
+run()

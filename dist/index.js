@@ -1042,23 +1042,12 @@ const core = __importStar(__webpack_require__(186));
 const path_1 = __webpack_require__(622);
 const fs_1 = __webpack_require__(747);
 const js_yaml_1 = __importDefault(__webpack_require__(917));
-function run() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield getFlutterVersion();
-        }
-        catch (error) {
-            core.setFailed(error.message);
-        }
-    });
-}
-run();
 const inputs = {
     path: (_a = core.getInput('path-to-pubspec')) !== null && _a !== void 0 ? _a : ''
 };
 function getFlutterVersion() {
     return __awaiter(this, void 0, void 0, function* () {
-        const dir = `${process.env.GITHUB_WORKSPACE || './'}${inputs.path}`;
+        const dir = `${process.env.GITHUB_WORKSPACE || '.'}${inputs.path}/`;
         const pubspecYaml = path_1.join(dir, 'pubspec.yaml');
         const pubspecObj = yield readYamlFile(pubspecYaml);
         if (!pubspecObj) {
@@ -1094,6 +1083,17 @@ function readYamlFile(file) {
         return js_yaml_1.default.safeLoad(fileData);
     });
 }
+function run() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield getFlutterVersion();
+        }
+        catch (error) {
+            core.setFailed(error.message);
+        }
+    });
+}
+run();
 
 
 /***/ }),
