@@ -1036,6 +1036,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = __importStar(__webpack_require__(186));
 const path_1 = __webpack_require__(622);
@@ -1052,9 +1053,12 @@ function run() {
     });
 }
 run();
+const inputs = {
+    path: (_a = core.getInput('path-to-pubspec')) !== null && _a !== void 0 ? _a : ''
+};
 function getFlutterVersion() {
     return __awaiter(this, void 0, void 0, function* () {
-        const dir = process.env.GITHUB_WORKSPACE || './';
+        const dir = `${process.env.GITHUB_WORKSPACE || './'}${inputs.path}`;
         const pubspecYaml = path_1.join(dir, 'pubspec.yaml');
         const pubspecObj = yield readYamlFile(pubspecYaml);
         if (!pubspecObj) {
