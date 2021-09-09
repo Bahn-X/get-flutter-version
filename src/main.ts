@@ -31,9 +31,7 @@ async function getFlutterVersion(): Promise<void> {
   }
   const versionList = pubspecData.version.split('+')
 
-  if (versionList.length !== 2) {
-    throw new Error('invalid version format in pubspec.yaml')
-  }
+  core.info(`Found version: ${pubspecData.version}`)
 
   core.info(`version_number: ${versionList[0]}`)
   core.info(`build_number: ${versionList[1]}`)
